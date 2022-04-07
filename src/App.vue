@@ -1,29 +1,36 @@
 <template>
 	<div id="app">
-		<div class="login" v-if="!isLogin">
-			<div class="enter-username">
-				<input type="text" placeholder="Username" v-model="email" />
+		<template v-if="listMesssage.length">
+			<div class="login" v-if="!isLogin">
+				<div class="enter-username">
+					<input type="text" placeholder="Username" v-model="email" />
+				</div>
+				<div class="enter-password">
+					<input type="text" placeholder="password" v-model="password" />
+				</div>
+				<button @click="register()">Register</button>
+				<button @click="login()">Login</button>
 			</div>
-			<div class="enter-password">
-				<input type="text" placeholder="password" v-model="password" />
-			</div>
-			<button @click="register()">Register</button>
-			<button @click="login()">Login</button>
-		</div>
-		<div class="chat-content" v-else>
-			<h1>Hello: {{ email }}</h1>
-			<div class="enter-message">
-				<input type="text" placeholder="Message" v-model="message" />
-				<button @click="sendMessage">Send</button>
-			</div>
-			<ul class="list-message" v-if="listMesssage.length">
-				<li class="item-message" v-for="m in listMesssage" :key="m.id">
-					<strong>{{ m.data.from }}</strong> : <i>{{ m.data.message }}</i>
-				</li>
-			</ul>
+			<div class="chat-content" v-else>
+				<h1>Hello: {{ email }}</h1>
+				<div class="enter-message">
+					<input type="text" placeholder="Message" v-model="message" />
+					<button @click="sendMessage">Send</button>
+				</div>
+				<ul class="list-message" v-if="listMesssage.length">
+					<li class="item-message" v-for="m in listMesssage" :key="m.id">
+						<strong>{{ m.data.from }}</strong> : <i>{{ m.data.message }}</i>
+					</li>
+				</ul>
 
-			<button @click="logout()">Logout</button>
-		</div>
+				<button @click="logout()">Logout</button>
+			</div>
+		</template>
+		<template v-else>
+			<div>
+				<h1>Loading</h1>
+			</div>
+		</template>
 	</div>
 </template>
 
